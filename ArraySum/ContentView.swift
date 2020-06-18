@@ -13,15 +13,23 @@ import Combine
 
 struct ContentView: View {
         @State private var results = [Result]()
-
+        @State private var sumAge: Int = 0
         var body: some View {
-            List(results, id: \.id) { item in
-                VStack(alignment: .leading) {
-                    Text("Age: \(item.age) years")
-                    Text(item.first_name + " " + item.last_name)
-                }
-            }.onAppear(perform: loadData)
+            
+                List(results, id: \.id) { item in
+                    Text("Count:\(self.increaseIndex(for: self.sumAge))  ")
+                    VStack(alignment: .leading) {
+                        Text("Age: \(item.age) years")
+                        Text(item.first_name + " " + item.last_name)
+                        
+                    }
+                }.onAppear(perform: loadData)
         }
+    
+    func increaseIndex(for sumAge: Int) -> Int {
+        self.sumAge += 1
+        return self.sumAge
+    }
     
     func loadData() {
         guard let url = URL(string: "https://learnappmaking.com/ex/users.json") else {
