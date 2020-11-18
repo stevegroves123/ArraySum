@@ -5,50 +5,45 @@
 //  Created by steve groves on 14/06/2020.
 //  Copyright © 2020 steve groves. All rights reserved.
 //
-// https://medium.com/@rbreve/displaying-a-list-with-swiftui-from-a-remote-json-file-6b4e4280a076
-//
 
 import SwiftUI
 import Combine
 
 struct ContentView: View {
-        @State private var results = [Result]()
-        @State private var sumAge: Int = 0
+        @State private var user = [Content]()
+    
         var body: some View {
-            
-                List(results, id: \.id) { item in
-                    Text("Count:\(self.increaseIndex(for: self.sumAge))  ")
-                    VStack(alignment: .leading) {
-                        Text("Age: \(item.age) years")
-                        Text(item.first_name + " " + item.last_name)
-                        
-                    }
+                List(user, id: \.id) { item in
+                    Text("\(item.name)")
                 }.onAppear(perform: loadData)
         }
     
-    func increaseIndex(for sumAge: Int) -> Int {
-        self.sumAge += 1
-        return self.sumAge
-    }
     
     func loadData() {
-        guard let url = URL(string: "https://learnappmaking.com/ex/users.json") else {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else {
             print("Invalid URL")
             return
         }
         let request = URLRequest(url: url)
-        
+        print(request)
         URLSession.shared.dataTask(with: request) { data, response, error in
+            print(response as Any)
+            print("")
+            print(error as Any)
             if let d = data {
-                if let decodedResponse = try? JSONDecoder().decode([Result].self, from: d) {
+                print("It made it here")
+                if let decodedResponse = try? JSONDecoder().decode([Content].self, from: d) {
                     // we have good data – go back to the main thread
+                    print("dispatched")
                     DispatchQueue.main.async {
                         // update our UI
-                        self.results = decodedResponse
+                        self.user = decodedResponse
                     }
                     // everything is good, so we can exit
+                    print("It all went well")
                     return
                 }
+                print("it went wrong somewhere")
             }
             // if we're still here it means there was a problem
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
@@ -56,11 +51,40 @@ struct ContentView: View {
     }
 }
 
-struct Result: Codable, Identifiable {
+struct Content: Decodable  {
     let id = UUID()
-    let first_name: String
-    let last_name: String
-    let age: Int
+    let name: String
+    let username: String
+    let email: String
+    let address: addr
+    let phone: String
+    let website: String
+    let company: compAddr
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case username
+        case email
+        case address
+        case phone
+        case website
+        case company
+    }
+}
+
+struct addr {
+    let id = UUID()
+    let street: String
+    let suite: String
+    let city: String
+    let zipcode: String
+    let geo: geoLatLon
+}
+
+struct geoLatLon {
+    let id = UUID()
+    let lat: String
+    let lon: String
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -68,3 +92,35 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct compAddr {
+    let name: String
+    let catchPhrase: String
+    let bs: String
+}
+
+/*
+ {
+   "id": 1,
+   "name": "Leanne Graham",
+   "username": "Bret",
+   "email": "Sincere@april.biz",
+   "address": {
+     "street": "Kulas Light",
+     "suite": "Apt. 556",
+     "city": "Gwenborough",
+     "zipcode": "92998-3874",
+     "geo": {
+       "lat": "-37.3159",
+       "lng": "81.1496"
+     }
+   },
+   "phone": "1-770-736-8031 x56442",
+   "website": "hildegard.org",
+   "company": {
+     "name": "Romaguera-Crona",
+     "catchPhrase": "Multi-layered client-server neural-net",
+     "bs": "harness real-time e-markets"
+   }
+ }
+ */
