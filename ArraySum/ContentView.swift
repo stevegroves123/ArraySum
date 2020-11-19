@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-        @State private var user = [Content]()
+        @State var user = [Content]()
     
         var body: some View {
                 List(user, id: \.id) { item in
@@ -51,8 +51,8 @@ struct ContentView: View {
     }
 }
 
-struct Content: Decodable  {
-    let id = UUID()
+struct Content: Identifiable, Codable {
+    let id: Int
     let name: String
     let username: String
     let email: String
@@ -73,7 +73,6 @@ struct Content: Decodable  {
 }
 
 struct addr {
-    let id = UUID()
     let street: String
     let suite: String
     let city: String
@@ -82,21 +81,21 @@ struct addr {
 }
 
 struct geoLatLon {
-    let id = UUID()
     let lat: String
     let lon: String
+}
+
+
+struct compAddr {
+    let name: String
+    let catchPhrase: String
+    let bs: String
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
-}
-
-struct compAddr {
-    let name: String
-    let catchPhrase: String
-    let bs: String
 }
 
 /*
