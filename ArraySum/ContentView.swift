@@ -14,7 +14,8 @@ struct ContentView: View {
     
         var body: some View {
                 List(user, id: \.id) { item in
-                    Text("\(item.name)")
+                    Text("\(item.name)").font(.body)
+                    Text("\(item.company.catchPhrase)").font(.subheadline)
                 }.onAppear(perform: loadData)
         }
     
@@ -51,17 +52,14 @@ struct ContentView: View {
     }
 }
 
-struct Content: Identifiable, Codable {
+struct Content: Codable {
     let id: Int
-    let name: String
-    let username: String
-    let email: String
+    let name, username, email,phone, website: String
     let address: addr
-    let phone: String
-    let website: String
     let company: compAddr
 
     enum CodingKeys: String, CodingKey {
+        case id
         case name
         case username
         case email
@@ -72,24 +70,18 @@ struct Content: Identifiable, Codable {
     }
 }
 
-struct addr {
-    let street: String
-    let suite: String
-    let city: String
-    let zipcode: String
+struct addr: Codable {
+    let street, suite, city, zipcode: String
     let geo: geoLatLon
 }
 
-struct geoLatLon {
-    let lat: String
-    let lon: String
+struct geoLatLon: Codable {
+    let lat, lng: String
 }
 
 
-struct compAddr {
-    let name: String
-    let catchPhrase: String
-    let bs: String
+struct compAddr: Codable {
+    let name, catchPhrase, bs: String
 }
 
 struct ContentView_Previews: PreviewProvider {
