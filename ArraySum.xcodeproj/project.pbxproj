@@ -13,6 +13,7 @@
 		4F743723249693A5008245CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F743722249693A5008245CC /* Assets.xcassets */; };
 		4F743726249693A5008245CC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F743725249693A5008245CC /* Preview Assets.xcassets */; };
 		4F743729249693A5008245CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F743727249693A5008245CC /* LaunchScreen.storyboard */; };
+		4FFD9902256717FE00D4E30E /* ArrayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD9901256717FE00D4E30E /* ArrayModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4F743725249693A5008245CC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F743728249693A5008245CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F74372A249693A5008245CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FFD9901256717FE00D4E30E /* ArrayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				4F74371C249693A4008245CC /* AppDelegate.swift */,
 				4F74371E249693A4008245CC /* SceneDelegate.swift */,
 				4F743720249693A4008245CC /* ContentView.swift */,
+				4FFD9901256717FE00D4E30E /* ArrayModel.swift */,
 				4F743722249693A5008245CC /* Assets.xcassets */,
 				4F743727249693A5008245CC /* LaunchScreen.storyboard */,
 				4F74372A249693A5008245CC /* Info.plist */,
@@ -149,6 +152,7 @@
 				4F74371D249693A4008245CC /* AppDelegate.swift in Sources */,
 				4F74371F249693A4008245CC /* SceneDelegate.swift in Sources */,
 				4F743721249693A4008245CC /* ContentView.swift in Sources */,
+				4FFD9902256717FE00D4E30E /* ArrayModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
